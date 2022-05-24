@@ -1,0 +1,46 @@
+servicecomb:
+  service:
+    application: weathermap
+    name: weather
+    version: 0.0.2
+    description: Basic version of weather service (excluding UV panel display).
+    properties:
+      allowCrossApp: false
+    registry:
+      address: http://127.0.0.1:30100 #此处填写要注册到的微服务引擎的注册中心地址
+      instance:
+        watch: false
+  config:
+    client:
+      serverUri:  http://127.0.0.1:30103 #此处填写要注册到的微服务引擎的配置中心地址
+      refreshMode: 1
+      refresh_interval: 5000
+  rest:
+    address: 0.0.0.0:13090
+    server:
+      compression: false
+      connection:
+        idleTimeoutInSeconds: 2
+  router:
+    type: router
+  monitor:
+    client:
+      enabled: true
+      serverUri: http://127.0.0.1:30109
+  handler:
+    chain:
+      Provider:
+        default: qps-flowcontrol-provider,bizkeeper-provider,auth-provider
+      Consumer:
+        default: qps-flowcontrol-consumer,loadbalance,fault-injection-consumer,bizkeeper-consumer
+  accesslog:
+    enabled: true
+    pattern: "%h %{dd/MMM/yyyy:HH:mm:ss.SSSZ|GMT+0008|en_US}t %r %s %B %D"
+
+# TODO: 使用微服务引擎专业版部署之前，需要配置 AK/SK
+#  credentials:
+#    akskEnabled: true
+#    accessKey: add your ak/sk from huaweicloud
+#    secretKey: add your ak/sk from huaweicloud
+#    akskCustomCipher: default
+#    project: cn-south-1
