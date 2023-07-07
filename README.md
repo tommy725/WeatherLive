@@ -2,7 +2,7 @@
 This is the most beautiful weather app.
 
 # URL
-https://play.google.com/store/apps/details?id=com.apalon.weatherlive
+https://play.google.com/store/apps/details?id=com.apalon.weatherlive 
 
 # Features
 • Weather forecasts for multiple locations all around the world
